@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Edit Booking</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label for="name">Name</label>
+    <input type="text" name="name" value="{{ booking.name }}" required>
+
+    <label for="visited_place">Visited Place</label>
+    <input type="text" name="visited_place" value="{{ booking.visited_place }}" required>
+
+    <label for="location">Location</label>
+    <input type="text" name="location" value="{{ booking.location }}" required>
+
+    <label for="hotel">Hotel</label>
+    <input type="text" name="hotel" value="{{ booking.hotel }}" required>
+
+    <label for="transport">Transport</label>
+    <input type="text" name="transport" value="{{ booking.transport }}" required>
+
+    <label for="booking_date">Booking Date</label>
+    <input type="date" name="booking_date" value="{{ booking.booking_date }}" required>
+
+    <label for="expired_date">Expired Date</label>
+    <input type="date" name="expired_date" value="{{ booking.expired_date }}" required>
+
+    <button type="submit">Save Changes</button>
+</form>
+{% endblock %}

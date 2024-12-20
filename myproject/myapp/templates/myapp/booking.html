@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/dashboard.css' %}">
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+    <title>AdminHub</title>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<section id="sidebar">
+    <a href="#" class="brand">
+        <i class='bx bxs-smile'></i>
+        <span class="text"></span>
+    </a>
+    <ul class="side-menu top">
+        <li>
+            <a href="{% url 'dashboard' %}">
+                <i class='bx bxs-message-dots' ></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <li class="active">
+                <a href="{% url 'dashboard' %}">
+                    <i class='bx bxs-dashboard' ></i>
+                    <span class="text">My booking</span>
+                </a>
+            </li>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-message-dots' ></i>
+                <span class="text">Message</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'park' %}">
+                <i class='bx bxs-tree'></i>
+                <span class="text">parks</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-building-house' ></i>
+                <span class="text">hotels</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i  class='bx bxs-bus' ></i>
+                <span class="text">transport</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-group' ></i>
+                <span class="text">Team</span>
+            </a>
+        </li>
+        <li>
+            <a href="analytics.html">
+                <i class='bx bxs-doughnut-chart' ></i>
+                <span class="text">Analytics</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="side-menu">
+        <li>
+            <a href="#">
+                <i class='bx bxs-cog' ></i>
+                <span class="text">Settings</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="logout">
+                <i class='bx bxs-log-out-circle' ></i>
+                <span class="text">Logout</span>
+            </a>
+        </li>
+    </ul>
+</section>
+<!-- SIDEBAR -->
+
+<!-- CONTENT -->
+<section id="content">
+    <nav>
+        <i class='bx bx-menu'></i>
+        <a href="#" class="nav-link">Categories</a>
+        <form action="#">
+            <div class="form-input">
+                <input type="search" placeholder="Search...">
+                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+            </div>
+        </form>
+        <a href="#" class="notification"><i class='bx bxs-bell'></i><span class="num">8</span></a>
+        <a href="#" class="profile"><img src="img/people.png"></a>
+    </nav>
+
+    <main>
+        <div class="head-title">
+            <h1>Dashboard</h1>
+            <ul class="breadcrumb">
+                <li><a href="#">Dashboard</a></li>
+            </ul>
+        </div>
+
+        <div class="table-data">
+            <div class="order">
+                <div class="head">
+                    <h3>Recent Bookings</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Hotel</th>
+                            <th>Transport</th>
+                            <th>Booking Date</th>
+                            <th>Expired Date</th>
+                            <th>Actions</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in bookings %}
+                        <tr>
+                            <td>
+                                {% if booking.image %}
+                                <img src="{{ booking.image.url }}" alt="{{ booking.name }}" style="width: 50px; height: auto;">
+                                {% else %}
+                                No Image
+                                {% endif %}
+                            </td>
+                            <td>{{ booking.name }}</td>
+                            <td>{{ booking.location }}</td>
+                            <td>{{ booking.hotel }}</td>
+                            <td>{{ booking.transport }}</td>
+                            <td>{{ booking.start_date|date:"Y-m-d" }}</td>
+                            <td>{{ booking.end_date|date:"Y-m-d" }}</td>
+                            <td>
+                                
+
+                                <!-- Delete Button -->
+                                <form action="{% url 'delete_booking' booking.id %}" method="POST" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="delete-btn">Delete</button>
+                                </form>
+                            </td>
+                            <td>
+                                {% if booking.status == 'pending' %}
+                                    <a href="{% url 'approve_booking' booking.id %}" class="approve-btn">Approve</a>
+                                    <a href="{% url 'reject_booking' booking.id %}" class="reject-btn">Reject</a>
+                                {% elif booking.status == 'approved' %}
+                                    <span class="approved">Approved</span>
+                                {% elif booking.status == 'rejected' %}
+                                    <span class="rejected">Rejected</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+   
+
+
+
+
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+</html>

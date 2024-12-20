@@ -1,0 +1,16 @@
+<form method="POST" action="{% url 'verify_otp' %}">
+    {% csrf_token %}
+    <h2>Verify OTP</h2>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="form-group">
+        <label for="otp">OTP</label>
+        <input type="text" id="otp" name="otp" placeholder="Enter your OTP" required>
+    </div>
+    <button type="submit" class="login-button">Verify OTP</button>
+</form>

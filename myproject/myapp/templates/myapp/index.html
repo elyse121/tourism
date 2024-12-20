@@ -1,0 +1,209 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>WoOx Travel</title>
+  
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-woox-travel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/siper-bundle.min.css"/>
+  
+</head>
+
+<body>
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="{% static 'assets/images/logo.png' %}" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="{% url 'index' %}" class="active">Home</a></li>
+                      <li><a href="more.html">More</a></li>
+                      <li><a href="{% url 'deals' %}">Book yours</a></li>
+                      <li><a href="{% url 'contact' %}">Contact us</a></li>
+                      <li><a href="register.html">Book Yours</a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- Main Banner Area Start -->
+  <section id="section-1">
+    <div class="content-slider">
+      <!-- Loop through each park to generate individual banners -->
+      {% for park in parks %}
+        <input type="radio" id="banner{{ forloop.counter }}" class="sec-1-input" name="banner" {% if forloop.first %}checked{% endif %}>
+      {% endfor %}
+      
+      <div class="slider">
+        <!-- Loop through each park to create banners -->
+        {% for park in parks %}
+          <div id="top-banner-{{ forloop.counter }}" class="banner">
+            <div class="banner-inner-wrapper header-text">
+              <div class="main-caption">
+                <h2>Take a Time and pay visit to the Rwandan Beautiful naturals Of:</h2>
+                <h1>{{ park.park_name }}</h1>
+                <div class="border-button"><a href="/more/">Go There</a></div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="more-info">
+                      <div class="row">
+                        <div class="col-lg-3 col-sm-6 col-6">
+                          <i class="fa fa-user"></i>
+                          <h4><span>Region:</span><br>{{ park.location }}</h4>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-6">
+                          <i class="fa fa-globe"></i>
+                          <h4><span>Area:</span><br>{{ park.size }} km<em>2</em></h4>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-6">
+                          <i class="fa fa-home"></i>
+                          <h4><span>AVG Price:</span><br>{{ park.visit_amount }} RWF</h4>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-6">
+                          <div class="main-button">
+                            <a href="more/">Explore More</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+  
+      <nav>
+        <div class="controls">
+          <!-- Loop through each park for the progress bar -->
+          {% for park in parks %}
+            <label for="banner{{ forloop.counter }}">
+              <span class="progressbar"><span class="progressbar-fill"></span></span>
+              <span class="text">{{ forloop.counter }}</span>
+            </label>
+          {% endfor %}
+        </div>
+      </nav>
+    </div>
+  </section>
+  <!-- Main Banner Area End -->
+
+  <!-- Visit Country Section -->
+  <div class="visit-country">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="section-heading">
+            <h2>Visit One Of Our Parks Now</h2>
+            <p> Rwanda is regarded as one of the safest countries to visit in Africa...</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="items">
+            <div class="row">
+              <!-- Loop through all parks -->
+              {% for park in allpark %}
+                <div class="col-lg-12">
+                  <div class="item">
+                    <div class="row">
+                      <div class="col-lg-4 col-sm-5">
+                        <div class="image">
+                          <!-- Check if image_1 exists and display it -->
+                          {% if park.image_1 %}
+                            <img src="{{ park.image_1.url }}" alt="{{ park.park_name }} Image">
+                          {% else %}
+                            <p>No image available</p>
+                          {% endif %}
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-sm-7">
+                        <div class="right-content">
+                          <h4>{{ park.park_name }}</h4>
+                          <span>{{ park.park_type }}</span>
+                          <div class="main-button">
+                            <!-- Check if park.id exists before creating the URL -->
+                            {% if park.id %}
+                              <a href="{% url 'more' park.id %}">View more</a>
+                            {% else %}
+                              <p>No park ID available</p>
+                            {% endif %}
+                          </div>
+                          <p>{{ park.description }}</p>
+                          <ul class="info">
+                            <li><i class="fa fa-location"></i>{{ park.location }}</li>
+                            <li><i class="fa fa-globe"></i> {{ park.size }} km<em>2</em></li>
+                            <li><i class="fa fa-dollar"></i> {{ park.visit_amount }} RWF</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="side-bar-map">
+            <div class="row">
+              <div class="col-lg-12">
+                <iframe src="https://www.google.com/maps/@?api=1&map_action=map&parameters
+                " width="100%" height="550px" frameborder="0" style="border:0; border-radius: 23px;" allowfullscreen=""></iframe>
+             
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2036 WoOx Travel Company. All rights reserved. Design: <a href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'assets/js/wow.js' %}"></script>
+  <script src="{% static 'assets/js/tabs.js' %}"></script>
+  <script src="{% static 'assets/js/popup.js' %}"></script>
+  <script src="{% static 'assets/js/custom.js' %}"></script>
+</body>
+
+</html>

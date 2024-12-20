@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings for {{ hotel.name }}</title>
+    <link rel="stylesheet" href="{% static 'assets/css/dashboard.css' %}">
+</head>
+<body>
+    <h1>Bookings for {{ hotel.name }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Booking Date</th>
+                <th>Expired Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hotel in hotels %}
+            <tr>
+                <td>{{ hotel.name }}</td>
+                <td>{{ hotel.address }}</td>
+                <td>
+                    
+                        <a href="{% url 'hotel_bookings' hotel.id %}" class="view-btn">View Bookings</a>
+                    </td>                
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No hotels found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'hotel_list' %}">Back to Hotel List</a>
+</body>
+</html>

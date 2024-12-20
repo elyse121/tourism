@@ -1,0 +1,251 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>WoOx Travel - Special Deals</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-woox-travel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <a href="index.html" class="logo">
+                            <img src="{% static 'assets/images/logo.png' %}" alt="">
+                        </a>
+                        <ul class="nav">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="more.html">More</a></li>
+                            <li><a href="deals.html" class="active">Deals</a></li>
+                            <li><a href="reservation.html">Contact us</a></li>
+                            <li><a href="reservation.html">Book Yours</a></li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>Discover Our Weekly Offers</h4>
+                    <h2>Amazing Prices &amp; More</h2>
+                    <!-- Button to trigger hotel data fetching -->
+                    <div class="border-button">
+                        <button id="discover-more-btn" class="btn btn-primary">Discover More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+ 
+    
+
+    <div class="search-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form id="search-form" name="gs" method="POST" action="{% url 'fetch_deals' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <!-- Location Select -->
+                            <div class="col-lg-4">
+                                <h4>Location</h4>
+                                <select name="location" id="location" class="form-select">
+                                    <option selected disabled>Select Location</option>
+                                    {% for location in locations %}
+                                        <option value="{{ location.id }}">{{ location.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                    
+                            <!-- Place to Visit Select -->
+                            <div class="col-lg-4">
+                                <h4>Place to Visit</h4>
+                                <select name="place_to_visit" id="place_to_visit" class="form-select">
+                                    <option selected disabled>Select Place to Visit</option>
+                                </select>
+                            </div>
+                    
+                            <!-- Hotel Select -->
+                            <div class="col-lg-4">
+                                <h4>Hotel</h4>
+                                <select name="hotel" id="hotel" class="form-select">
+                                    <option selected disabled>Select Hotel</option>
+                                </select>
+                            </div>
+                        </div>
+                    
+                        <!-- Date Fields -->
+                        <div class="row mt-3">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="startDate">Start Date:</label>
+                                    <input type="date" name="startDate" class="form-control" id="startDate" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="endDate">End Date:</label>
+                                    <input type="date" name="endDate" class="form-control" id="endDate" required>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- New Fields: Images, Name, and Transport -->
+                        <div class="row mt-3">
+                            <!-- Upload Image -->
+                            <div class="col-lg-4">
+                                <h4>Upload Image</h4>
+                                <div class="form-group">
+                                    <input type="file" name="image" class="form-control" id="image" accept="image/*">
+                                </div>
+                            </div>
+                    
+                            <!-- Name Input -->
+                            <div class="col-lg-4">
+                                <h4>Name</h4>
+                                <div class="form-group">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name">
+                                </div>
+                            </div>
+                    
+                            <!-- Transport Means Select -->
+                            <div class="col-lg-4">
+                                <h4>Transport</h4>
+                                <select name="transport" id="transport" class="form-select">
+                                    <option selected disabled>Select Transport Means</option>
+                                    <option value="bus">Bus</option>
+                                    <option value="car">Car</option>
+                                    <option value="bike">Bike</option>
+                                    <option value="walk">Walk</option>
+                                </select>
+                            </div>
+                        </div>
+                    
+                        <!-- Submit Button -->
+                        <div class="row mt-4">
+                            <div class="col-lg-12 text-center">
+                                <button type="submit" class="btn btn-primary">Book Yours</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        document.getElementById("location").addEventListener("change", function() {
+            var locationId = this.value;
+            updatePlaceToVisit(locationId);
+        });
+    
+        document.getElementById("place_to_visit").addEventListener("change", function() {
+            var placeId = this.value;
+            updateHotel(placeId);
+        });
+    
+        function updatePlaceToVisit(locationId) {
+            console.log('Location ID selected:', locationId); // Debugging log
+            if (locationId) {
+                fetch(`/fetch_places/${locationId}/`)  // URL to fetch places based on location
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Places data:', data); // Debugging log
+                        var placeSelect = document.getElementById("place_to_visit");
+                        placeSelect.innerHTML = '<option selected>Select Place to Visit</option>';
+                        if (data.places && data.places.length > 0) {
+                            data.places.forEach(place => {
+                                var option = document.createElement("option");
+                                option.value = place.id;
+                                option.textContent = place.name;
+                                placeSelect.appendChild(option);
+                            });
+                        } else {
+                            placeSelect.innerHTML += '<option>No places available</option>';
+                        }
+                        updateHotel(null);  // Reset hotel options when location changes
+                    })
+                    .catch(error => {
+                        console.error('Error fetching places:', error);
+                    });
+            } else {
+                document.getElementById("place_to_visit").innerHTML = '<option selected>Select Place to Visit</option>';
+                updateHotel(null);  // Reset hotel options if no location is selected
+            }
+        }
+    
+        function updateHotel(placeId) {
+            console.log('Place ID selected:', placeId); // Debugging log
+            if (placeId) {
+                fetch(`/fetch_hotels/${placeId}/`)  // URL to fetch hotels based on place
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Hotels data:', data); // Debugging log
+                        var hotelSelect = document.getElementById("hotel");
+                        hotelSelect.innerHTML = '<option selected>Select Hotel</option>';
+                        if (data.hotels && data.hotels.length > 0) {
+                            data.hotels.forEach(hotel => {
+                                var option = document.createElement("option");
+                                option.value = hotel.id;
+                                option.textContent = hotel.name;
+                                hotelSelect.appendChild(option);
+                            });
+                        } else {
+                            hotelSelect.innerHTML += '<option>No hotels available</option>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching hotels:', error);
+                    });
+            } else {
+                document.getElementById("hotel").innerHTML = '<option selected>Select Hotel</option>';
+            }
+        }
+    </script>
+    
+    
+        
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright © 2036 <a href="#">WoOx Travel</a> Company. All rights reserved.
+                        <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+</body>
+
+</html>

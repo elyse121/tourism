@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/dashboard.css' %}">
+    <title>AdminHub</title>
+    <style>
+        /* Styling for the hotel boxes */
+        .hotel-box {
+            display: inline-block;
+            width: 20%;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+            cursor: pointer;
+        }
+        .hotel-box:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<section id="sidebar">
+    <a href="#" class="brand">
+        <i class='bx bxs-smile'></i>
+        <span class="text"></span>
+    </a>
+    <ul class="side-menu top">
+        <li>
+            <a href="{% url 'dashboard' %}">
+                <i class='bx bxs-message-dots'></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+        <li class="active">
+            <a href="{% url 'all_hotels' %}">
+                <i class='bx bxs-dashboard'></i>
+                <span class="text">All Hotels</span>
+            </a>
+        </li>
+        <!-- Add more sidebar items here -->
+    </ul>
+</section>
+<!-- SIDEBAR -->
+
+<!-- CONTENT -->
+<section id="content">
+    <nav>
+        <i class='bx bx-menu'></i>
+        <a href="#" class="nav-link">Categories</a>
+        <form action="#">
+            <div class="form-input">
+                <input type="search" placeholder="Search...">
+                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+            </div>
+        </form>
+    </nav>
+
+    <main>
+        <div class="head-title">
+            <h1>All Hotels</h1>
+            <ul class="breadcrumb">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">All Hotels</a></li>
+            </ul>
+        </div>
+
+        <div class="hotel-boxes">
+            {% for hotel in hotels %}
+                <div class="hotel-box" onclick="window.location.href='{% url 'hotel_bookings' hotel.id %}'">
+                    <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" style="width: 100%; height: auto;">
+                    <h4>{{ hotel.name }}</h4>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+</section>
+<!-- CONTENT -->
+
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+</html>

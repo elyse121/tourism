@@ -1,0 +1,13 @@
+<h1>Search Results</h1>
+<form action="{% url 'search_bookings' %}" method="get">
+    <input type="text" name="search" placeholder="Search by name..." value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+    {% for booking in bookings %}
+        <li>{{ booking.name }} - {{ booking.location }}</li>
+    {% empty %}
+        <li>No results found</li>
+    {% endfor %}
+</ul>

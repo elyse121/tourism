@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Payment</title>
+    <link rel="shortcut icon" href="https://www.ibereryabigogwe.com/favicon.png" type="image/x-icon">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,800&display=swap" rel="stylesheet" />
+
+    <link rel="preload" as="style" href="https://www.ibereryabigogwe.com/build/assets/app-9ed6db37.css" /><link rel="modulepreload" href="https://www.ibereryabigogwe.com/build/assets/app-4326402f.js" /><link rel="stylesheet" href="https://www.ibereryabigogwe.com/build/assets/app-9ed6db37.css" /><script type="module" src="https://www.ibereryabigogwe.com/build/assets/app-4326402f.js"></script>    <style >[wire\:loading], [wire\:loading\.delay], [wire\:loading\.inline-block], [wire\:loading\.inline], [wire\:loading\.block], [wire\:loading\.flex], [wire\:loading\.table], [wire\:loading\.grid], [wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short], [wire\:loading\.delay\.long], [wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest] {display:none;}[wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill {animation-duration: 50000s;animation-name: livewireautofill;}@keyframes livewireautofill { from {} }</style> <script src="/livewire/livewire.js?id=90730a3b0e7144480175" data-turbo-eval="false" data-turbolinks-eval="false" ></script><script data-turbo-eval="false" data-turbolinks-eval="false" >window.livewire = new Livewire();window.Livewire = window.livewire;window.livewire_app_url = '';window.livewire_token = 'mK14VzR475nrvCWF8FOr012XLBfJd4oBvy3f2Tl3';window.deferLoadingAlpine = function (callback) {window.addEventListener('livewire:load', function () {callback();});};let started = false;window.addEventListener('alpine:initializing', function () {if (! started) {window.livewire.start();started = true;}});document.addEventListener("DOMContentLoaded", function () {if (! started) {window.livewire.start();started = true;}});</script>
+    
+    <style>
+        #loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.75) url("https://ibereryabigogwe.com/images/loader.gif") no-repeat center center;
+            z-index: 99999;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+
+<body class="dark:bg-slate-900 bg-white">
+    <nav
+    class="px-2 sm:px-4 py-1 sm:py-2 absolute top-0 w-full z-20 bg-white/70 backdrop-blur-sm">
+    <div class="container flex flex-wrap items-center justify-between py-1 mx-auto border-b-2  border-primary-800">
+        <button data-collapse-toggle="navbar-sticky" type="button"
+                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-sticky" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        <a href="https://www.ibereryabigogwe.com" class="flex items-center">
+            <img src="https://www.ibereryabigogwe.com/images/logo.png" class="w-12 sm:w-16 mr-3 scale-150" alt="logo">
+            <span class="sr-only">Home</span>
+        </a>
+        <div class="flex lg:order-2">
+            <a href="https://www.ibereryabigogwe.com/booking" type="button"
+                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 duration-200 focus:outline-none focus:ring-primary-300 lg:font-medium rounded-full lg:text-sm text-xs lg:px-9 lg:py-3 px-3 py-2.5 text-center mr-3 lg:mr-0 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 uppercase">Book Now</a>
+            
+        </div>
+        <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-sticky">
+            <ul class="flex flex-col p-4 mt-4 border transition-all duration-1000 delay-500 ease-in rounded-t-lg bg-gray-50 lg:flex-row lg:space-x-8 lg:mt-0 lg:text-sm lg:font-medium lg:border-0 lg:bg-white/0 dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+    <a class="block py-2 pl-3 pr-4 font-medium text-primary-600 text-base rounded lg:hover:bg-transparent lg:hover:text-primary-800 lg:p-0 lg:dark:hover:text-white dark:text-primary-400 dark:hover:bg-primary-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-primary-700 transition-all ease-i" href="https://www.ibereryabigogwe.com">
+        Home
+    </a>
+</li>                <li>
+    <a class="block py-2 pl-3 pr-4 font-medium text-primary-600 text-base rounded lg:hover:bg-transparent lg:hover:text-primary-800 lg:p-0 lg:dark:hover:text-white dark:text-primary-400 dark:hover:bg-primary-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-primary-700 transition-all ease-i" href="https://www.ibereryabigogwe.com/services">
+        Services
+    </a>
+</li>                <li>
+    <a class="block py-2 pl-3 pr-4 font-medium text-primary-600 text-base rounded lg:hover:bg-transparent lg:hover:text-primary-800 lg:p-0 lg:dark:hover:text-white dark:text-primary-400 dark:hover:bg-primary-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-primary-700 transition-all ease-i" href="https://www.ibereryabigogwe.com/booking">
+        Booking
+    </a>
+</li>                <li>
+    <a class="block py-2 pl-3 pr-4 font-medium text-primary-600 text-base rounded lg:hover:bg-transparent lg:hover:text-primary-800 lg:p-0 lg:dark:hover:text-white dark:text-primary-400 dark:hover:bg-primary-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-primary-700 transition-all ease-i" href="https://www.ibereryabigogwe.com/gallery">
+        Gallery
+    </a>
+</li>                <li>
+    <a class="block py-2 pl-3 pr-4 font-medium text-primary-600 text-base rounded lg:hover:bg-transparent lg:hover:text-primary-800 lg:p-0 lg:dark:hover:text-white dark:text-primary-400 dark:hover:bg-primary-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-primary-700 transition-all ease-i" href="https://www.ibereryabigogwe.com/blogs">
+        Blogs
+    </a>
+</li>                <li>
+    <a class="block py-2 pl-3 pr-4 font-medium text-primary-600 text-base rounded lg:hover:bg-transparent lg:hover:text-primary-800 lg:p-0 lg:dark:hover:text-white dark:text-primary-400 dark:hover:bg-primary-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-primary-700 transition-all ease-i" href="https://www.ibereryabigogwe.com/about">
+        About us
+    </a>
+</li>                <li>
+    <a class="block py-2 pl-3 pr-4 font-medium text-primary-600 text-base rounded lg:hover:bg-transparent lg:hover:text-primary-800 lg:p-0 lg:dark:hover:text-white dark:text-primary-400 dark:hover:bg-primary-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-primary-700 transition-all ease-i" href="https://www.ibereryabigogwe.com/contact">
+        Contact us
+    </a>
+</li>            </ul>
+        </div>
+    </div>
+</nav>    <div class="mt-16 md:mt-24">
+      <div class="container min-h-[600px] px-4 mx-auto">
+        <div class="py-12 md:py-16">
+          <div class="grid gap-6 justify-center md:grid-cols-[auto,auto]">
+            <img src="https://ibereryabigogwe.com/storage/packages_images/FRJSzM8g5neURA4WSb7fpecB7f3U2B-metaQ1VocEppTFBnamozWGlLUTcyeFc4T2Y0OHhsV1l0LW1ldGFSbkZpZVd0dVVWZDNRVVZNUVdoU0xtcHdadz09LS5qcGc=-.jpg" alt="">
+            <div>
+                <h1 class="text-3xl font-bold">Confirm your booking</h1>
+              <div class="md:text-lg">
+                <p class="py-2 border-b-2">Name: <span class="font-semibold">muhire adolphe</span> <br>Email: <span class="font-semibold">adolphemuhire404@gmail.com</span><br>Country: <span class="font-semibold">Rwanda</span><br>Phone number: <span class="font-semibold">0789059670</span></p>
+                <p class="mt-2">Package: <span class="font-semibold">Half day cow experiencee</span></p>
+                <p class="text-lg">For <span class="font-semibold">5 </span>people</p>
+                <p>Duration: <span class="font-semibold">0</span> Day(s) <br>From: <span class="font-semibold">2024-12-12</span> <br> To: <span class="font-semibold">2024-12-12</span></p>
+              </div>
+              <div class="mt-8">
+                <p class="md:text-lg">Price: <span class="font-semibold">$150</span></p>
+                <div class="flex items-center gap-4 mt-2">
+                  <form method="POST" action="https://www.ibereryabigogwe.com/process-booking" id="paymentForm">
+                    <input type="hidden" name="_token" value="mK14VzR475nrvCWF8FOr012XLBfJd4oBvy3f2Tl3" autocomplete="off">                    <input type="hidden" name="amount" value="150"/>
+                    <!-- Replace the value with your transaction amount -->
+                    <input type="hidden" name="description" value="Half day cow experience"/>
+                    <input type="hidden" name="booking_id" value=""/>
+                    <!-- Replace the value with your transaction description -->
+                    <input type="hidden" name="currency" value="USD"/>
+                    <!-- Replace the value with your transaction currency -->
+                    <input type="hidden" name="payment_method" value=""/>
+                    <input type="hidden" name="email" value="adolphemuhire404@gmail.com"/>
+                    <!-- Replace the value with your customer email -->
+                    <input type="hidden" name="first_name" value="muhire adolphe"/>
+                    <!-- Replace the value with your customer firstname (optional) -->
+                    <input type="hidden" name="last_name" value="**"/>
+                    <!-- Replace the value with your customer lastname (optional) -->
+                    <input type="hidden" name="phone_number" value="0789059670"/>
+                    <!-- Replace the value with your customer phonenumber (optional if email is passes) -->
+                    <input type="hidden" name="pay_button_text" value="Complete Payment"/>
+                    <!-- Replace the value with the payment button text you prefer (optional) -->
+                    <input type="hidden" name="tx_ref" value="9db2e593-5b37-4a94-b699-7870a555ebb1"/>
+                    <!-- Replace the value with your transaction reference. It must be unique per transaction. You can delete this line if you want one to be generated for you. -->
+                    <input type="hidden" name="success_url" value="https://www.ibereryabigogwe.com/finalize-booking">
+                    <!-- Put your success url here -->
+                    <input type="hidden" name="failure_url" value="https://www.ibereryabigogwe.com/booking">
+                    <!-- Put your failure url here -->
+                    <button type="submit" class="inline-flex items-center gap-2 justify-center px-4 py-2 rounded-md bg-emerald-700 text-white font-medium tracking-wide">
+                      <svg class="w-6 h-6 flex-shrink-0" fill="currentColor" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 236.764 236.764" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M110.035,151.039c0.399,3.858,3.655,6.73,7.451,6.73c0.258,0,0.518-0.013,0.78-0.04c4.12-0.426,7.115-4.111,6.689-8.231 l-3.458-33.468c-0.426-4.121-4.11-7.114-8.231-6.689c-4.12,0.426-7.115,4.111-6.689,8.231L110.035,151.039z"></path> <path d="M156.971,157.729c0.262,0.027,0.522,0.04,0.78,0.04c3.795,0,7.052-2.872,7.451-6.73l3.458-33.468 c0.426-4.121-2.569-7.806-6.689-8.231c-4.121-0.419-7.806,2.569-8.231,6.689l-3.458,33.468 C149.855,153.618,152.85,157.303,156.971,157.729z"></path> <path d="M98.898,190.329c-12.801,0-23.215,10.414-23.215,23.215c0,12.804,10.414,23.221,23.215,23.221 c12.801,0,23.216-10.417,23.216-23.221C122.114,200.743,111.699,190.329,98.898,190.329z M98.898,221.764 c-4.53,0-8.215-3.688-8.215-8.221c0-4.53,3.685-8.215,8.215-8.215c4.53,0,8.216,3.685,8.216,8.215 C107.114,218.076,103.428,221.764,98.898,221.764z"></path> <path d="M176.339,190.329c-12.801,0-23.216,10.414-23.216,23.215c0,12.804,10.415,23.221,23.216,23.221 c12.802,0,23.218-10.417,23.218-23.221C199.557,200.743,189.141,190.329,176.339,190.329z M176.339,221.764 c-4.53,0-8.216-3.688-8.216-8.221c0-4.53,3.686-8.215,8.216-8.215c4.531,0,8.218,3.685,8.218,8.215 C184.557,218.076,180.87,221.764,176.339,221.764z"></path> <path d="M221.201,84.322c-1.42-1.837-3.611-2.913-5.933-2.913H65.773l-6.277-24.141c-0.86-3.305-3.844-5.612-7.259-5.612h-30.74 c-4.142,0-7.5,3.358-7.5,7.5s3.358,7.5,7.5,7.5h24.941l6.221,23.922c0.034,0.15,0.073,0.299,0.116,0.446l23.15,89.022 c0.86,3.305,3.844,5.612,7.259,5.612h108.874c3.415,0,6.399-2.307,7.259-5.612l23.211-89.25 C223.111,88.55,222.621,86.158,221.201,84.322z M186.258,170.659H88.982l-19.309-74.25h135.894L186.258,170.659z"></path> <path d="M106.603,39.269l43.925,0.002L139.06,50.74c-2.929,2.929-2.929,7.678,0,10.606c1.464,1.464,3.384,2.197,5.303,2.197 c1.919,0,3.839-0.732,5.303-2.197l24.263-24.263c2.929-2.929,2.929-7.678,0-10.606l-24.28-24.28c-2.929-2.929-7.678-2.929-10.607,0 c-2.929,2.929-2.929,7.678,0,10.607l11.468,11.468l-43.907-0.002h0c-4.142,0-7.5,3.358-7.5,7.5 C99.104,35.911,102.461,39.269,106.603,39.269z"></path> </g> </g></svg>
+                      Checkout
+                    </button>
+                </form>
+
+                  <a href="https://www.ibereryabigogwe.com/booking" class="inline-flex items-center gap-2 justify-center px-4 py-2 rounded-md bg-red-700 text-white font-medium tracking-wide">
+                    <svg class="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>cancel2</title> <path d="M19.587 16.001l6.096 6.096c0.396 0.396 0.396 1.039 0 1.435l-2.151 2.151c-0.396 0.396-1.038 0.396-1.435 0l-6.097-6.096-6.097 6.096c-0.396 0.396-1.038 0.396-1.434 0l-2.152-2.151c-0.396-0.396-0.396-1.038 0-1.435l6.097-6.096-6.097-6.097c-0.396-0.396-0.396-1.039 0-1.435l2.153-2.151c0.396-0.396 1.038-0.396 1.434 0l6.096 6.097 6.097-6.097c0.396-0.396 1.038-0.396 1.435 0l2.151 2.152c0.396 0.396 0.396 1.038 0 1.435l-6.096 6.096z"></path> </g></svg>
+                    Cancel
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-primary-800 text-white">
+    <footer class="md:px-10 px-5 py-12 container mx-auto">
+        <div class="md:flex md:justify-between">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div>
+                <a href="https://www.ibereryabigogwe.com" class="flex items-center">
+                    <img src="https://www.ibereryabigogwe.com/images/logo-dark.png" class="h-32 mr-3" alt="footer Logo" />
+                </a>
+                <p class="mr-10">Immerse yourself in the rich history and culture of Ibere rya Bigogwe, where cows play a vital role in daily life and the local economy. Our goal is to provide visitors with an authentic Rwandan experience and a glimpse into the vibrant culture of our community.</p>
+            </div>
+                <div class="lg:mt-10">
+                    <h2 class="mb-6 text-xl font-semibold text-white uppercase">Links</h2>
+                    <ul class="text-gray-200">
+                        <li class="mb-2">
+                            <a href="https://www.ibereryabigogwe.com" class="hover:underline">Home</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="https://www.ibereryabigogwe.com/services" class="hover:underline">Services</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="https://www.ibereryabigogwe.com/gallery" class="hover:underline">Gallery</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="https://www.ibereryabigogwe.com/blogs" class="hover:underline">Blogs</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="https://www.ibereryabigogwe.com/about" class="hover:underline">About us</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="https://www.ibereryabigogwe.com/contact" class="hover:underline">Contacts</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lg:mt-10">
+                    <h2 class="mb-6 text-xl font-semibold text-white uppercase">NewsLetters</h2>
+                    <ul class="text-gray-600 dark:text-gray-400">
+                        <div class="flex items-center flex-shrink-0 w-full mx-auto sm:w-auto">
+                            <form action="#" class="flex flex-col flex-wrap gap-5 items-center w-full md:flex-row">
+                                <label for="email" class="flex-shrink-0 mb-2 mr-auto text-sm font-medium text-gray-200 md:mb-0 md:mr-4 md:m-0">Sign up for our newsletter</label>
+                                <input type="email" id="email" placeholder="Enter your email" class="bg-white border border-gray-300 text-gray-900 md:w-64 mb-2 md:mb-0 md:mr-4 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                                <button type="submit" class="text-black bg-primary-100 hover:bg-primary-500 focus:ring-4 focus:outline-none focus:ring-primary-500 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center">Subscribe</button>
+                            </form>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8">
+    <div class="flex flex-wrap gap-6">
+        <!-- Facebook link -->
+                <!-- Instagram link -->
+                <a href="https://www.instagram.com/ngabo_karegeya/" class="text-gray-50 hover:text-gray-900 dark:hover:text-white">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd"
+                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                    clip-rule="evenodd" />
+            </svg>
+            <span class="sr-only">Instagram page</span>
+        </a>
+                <!-- Twitter link -->
+                <a href="https://twitter.com/Visit_Bigogwe" class="text-gray-50 hover:text-gray-900 dark:hover:text-white">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+            </svg>
+            <span class="sr-only">Twitter link</span>
+        </a>
+                <!-- Telegram link -->
+                <!-- Tiktok link -->
+                <a href="https://www.tiktok.com/@ibereryabigogwe" class="text-gray-50 hover:text-gray-900 dark:hover:text-white">
+
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6">
+                <g id="SVGRepo_bgCarrier"></g>
+                <g id="SVGRepo_tracerCarrier"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M20 7.50414C18.5333 7.56942 15.52 6.75998 15.2 3H12.4V13.9666C12.4 17.0999 9.93253 18.4412 8.289 17.2507C6.20169 15.7389 7.60003 12.5958 10.2 12.9874V9.6583C8.20003 9.6583 4 10.4416 4 15.3374C4 21.6041 10.8146 21.4083 12.4 20.5824C14.9798 19.2385 15.6 17.7827 15.6 14.5541C15.6 11.6166 15.6 9.85413 15.6 9.0708C16.2667 9.39719 18.08 10.0891 20 10.2458">
+                    </path>
+                </g>
+            </svg>
+
+            <span class="sr-only">Tiktok link</span>
+        </a>
+                <!-- whatsapp link -->
+                <a href="https://wa.me/+250781994849  " class="text-gray-50 hover:text-gray-900 dark:hover:text-white">
+
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" class="w-6 h-6">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <rect x="0" fill="none" width="20" height="20"></rect>
+                    <g>
+                        <path
+                            d="M16.8 5.7C14.4 2 9.5.9 5.7 3.2 2 5.5.8 10.5 3.2 14.2l.2.3-.8 3 3-.8.3.2c1.3.7 2.7 1.1 4.1 1.1 1.5 0 3-.4 4.3-1.2 3.7-2.4 4.8-7.3 2.5-11.1zm-2.1 7.7c-.4.6-.9 1-1.6 1.1-.4 0-.9.2-2.9-.6-1.7-.8-3.1-2.1-4.1-3.6-.6-.7-.9-1.6-1-2.5 0-.8.3-1.5.8-2 .2-.2.4-.3.6-.3H7c.2 0 .4 0 .5.4.2.5.7 1.7.7 1.8.1.1.1.3 0 .4.1.2 0 .4-.1.5-.1.1-.2.3-.3.4-.2.1-.3.3-.2.5.4.6.9 1.2 1.4 1.7.6.5 1.2.9 1.9 1.2.2.1.4.1.5-.1s.6-.7.8-.9c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.5.3.1.3.1.7-.1 1z">
+                        </path>
+                    </g>
+                </g>
+            </svg>
+            <span class="sr-only">Whatsapp link</span>
+        </a>
+                <!-- Pinterest link -->
+                <!-- Youtube link -->
+                <a href="https://www.youtube.com/@VisitBigogwe" class="text-gray-50 hover:text-gray-900 dark:hover:text-white">
+            <svg fill="#ffffff" class="w-6 h-6" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-271 311.2 256 179.8" xml:space="preserve"
+                stroke="#ffffff">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M-59.1,311.2h-167.8c0,0-44.1,0-44.1,44.1v91.5c0,0,0,44.1,44.1,44.1h167.8c0,0,44.1,0,44.1-44.1v-91.5 C-15,355.3-15,311.2-59.1,311.2z M-177.1,450.3v-98.5l83.8,49.3L-177.1,450.3z">
+                    </path>
+                </g>
+            </svg>
+            <span class="sr-only">Youtube page</span>
+        </a>
+                <!-- Linkedin link -->
+            </div>
+    <div class="mt-10 -mb-5 text-center text-sm text-gray-200">© 2024 Ibere rya Bigogwe Ltd. All rights reserved. Designed with ❤️ by <a href="https://osopox.com" class="underline" target="_blank">OSOPOX</a></div>
+</div>
+    </footer>
+</div>
+    
+
+
+    <script>
+        $(function() {
+                    $( "form" ).submit(function() {
+                        $('#loader').show();
+                    });
+                });
+    </script>
+    <!--Start of Tawk.to Script-->
+    
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

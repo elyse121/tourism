@@ -1,0 +1,562 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="{% static 'assets/css/dashboard.css' %}">
+
+	<title>AdminHub</title>
+	<style>
+		
+    .profile-dropdown {
+		margin-top: 140px;
+		margin-left: 750px;
+        position: absolute;
+        background-color: #534d4d;
+        color: #000;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        width: 200px;
+    }
+    .logout-button {
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+        color: #e74c3c;
+        text-decoration: none;
+    }
+    .logout-button:hover {
+        color: #c0392b;
+    }
+
+		/* Popup overlay */
+		.managers-popup {
+			display: none; /* Hidden by default */
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+			z-index: 1000;
+			overflow-y: auto; /* Allow scrolling if necessary */
+		}
+	
+		/* Popup content */
+		.popup-content {
+			position: absolute;
+			top: 50%;
+			left: 60%;
+			transform: translate(-50%, -50%);
+			background-color: #ffffff;
+			padding: 30px;
+			border-radius: 12px;
+			width: 80%;
+			max-width: 900px;
+			max-height: 80%;
+			overflow-y: auto;
+			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+			animation: fadeIn 0.5s ease-in-out;
+		}
+	
+		/* Fade-in effect */
+		@keyframes fadeIn {
+			0% { opacity: 0; }
+			100% { opacity: 1; }
+		}
+	
+		/* Close button */
+		.close-btn {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			font-size: 28px;
+			color: #333;
+			font-weight: bold;
+			cursor: pointer;
+			transition: color 0.3s;
+		}
+	
+		.close-btn:hover {
+			color: #e74c3c;
+		}
+	
+		/* Table Styling */
+		#managers-table {
+			width: 100%;
+			border-collapse: collapse;
+			font-family: 'Arial', sans-serif;
+			font-size: 16px;
+			border-radius: 8px;
+			overflow: hidden;
+			margin-top: 20px;
+		}
+	
+		#managers-table th, #managers-table td {
+			padding: 12px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+	
+		#managers-table th {
+			background-color: #3498db;
+			color: white;
+			font-weight: bold;
+		}
+	
+		#managers-table td {
+			background-color: #f9f9f9;
+			color: #333;
+		}
+	
+		#managers-table tbody tr:hover td {
+			background-color: #f1f1f1; /* Highlight rows on hover */
+		}
+	
+		#managers-table tbody tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+	
+		#managers-table tbody tr:nth-child(odd) {
+			background-color: #ffffff;
+		}
+	
+		/* Button styling for the + icon */
+		.view-managers-btn {
+			background: none;
+			border: none;
+			font-size: 28px;
+			cursor: pointer;
+			color: #3498db;
+			transition: color 0.3s;
+		}
+	
+		.view-managers-btn:hover {
+			color: #1d6ba3;
+		}
+	
+		/* Adding padding around the table */
+		.popup-content {
+			max-height: 80%;
+			overflow-y: auto;
+			padding: 20px;
+		}
+	
+		/* Scrollable table content */
+		#managers-list {
+			padding: 0 10px;
+			max-height: 500px;
+			overflow-y: auto;
+		}
+	
+	</style>
+	
+
+	
+	
+	
+</head>
+<body>
+
+	
+	
+	
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">Rwanda Horizon Tours</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="#">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<li>
+					<a href="{% url 'booking' %}">
+						<i class='bx bxs-shopping-bag-alt'></i>
+						<span class="text">My bookings</span>
+					</a>
+				</li>
+				
+			</li>
+			
+			<li>
+				<a href="#">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Message</span>
+				</a>
+			</li>
+			<li>
+				<a href="{% url 'park' %}">
+					<i class='bx bxs-tree'></i>
+					<span class="text">parks</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bx-building-house' ></i>
+					<span class="text">hotels</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i  class='bx bxs-bus' ></i>
+					<span class="text">transport</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Team</span>
+				</a>
+			</li>
+			<li>
+				<a href="analytics.html">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Analytics</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">8</span>
+			</a>
+			<a href="#" class="profile" onclick="toggleProfileDropdown()">
+				{% if manager.profile_picture %}
+					<img src="{{ manager.profile_picture.url }}" alt="{{ manager.name }}'s Profile Picture">
+				{% else %}
+					<img src="/static/images/default_profile.png" alt="Default Profile Picture">
+				{% endif %}
+			</a>
+			
+			<!-- Profile Dropdown -->
+			<div id="profile-dropdown" class="profile-dropdown" style="display: none;">
+				<p><strong>{{ manager.name }}</strong></p>
+				<p>Status: {{ manager.category|capfirst }}</p>
+				<a href="{% url 'logout' %}" class="logout-button">Logout</a>
+			</div>
+			
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Welcome to {{ manager.name }}'s Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+				<a href="#" class="btn-download">
+					<i class='bx bxs-cloud-download' ></i>
+					<span class="text">Download PDF</span>
+				</a>
+			</div>
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-calendar-check'></i>
+					<span class="text">
+						<h3>{{ total_visitors }}</h3>
+						<p>Total Visitors</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-group'></i>
+					<span class="text">
+						<h3>{{ pending_visitors }}</h3>
+						<p>Pending Visitors</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-dollar-circle'></i>
+					<span class="text">
+						<h3>{{ approved_visitors }}</h3>
+						<p>Approved Visitors</p>
+					</span>
+				</li>
+				<!-- New div for Hotels -->
+				<li>
+					<i class='bx bxs-building-house'></i>
+					<span class="text">
+						<h3>{{ total_hotels }}</h3>
+						<p>Total Hotels</p>
+					</span>
+				</li>
+				<!-- New div for Managers -->
+				<li>
+					<i class='bx bxs-user'></i>
+					<span class="text">
+						<h3>{{ total_managers }}</h3>
+						<p>Total Managers</p>
+					</span>
+					<button class="view-managers-btn" onclick="showManagersPopup()">+</button>
+				</li>
+				
+				<!-- Popup for displaying managers -->
+				<div id="managers-popup" class="managers-popup">
+					<div class="popup-content">
+						<!-- Close Button -->
+						<span class="close-btn" onclick="closeManagersPopup()">×</span>
+						
+						<!-- Popup Title -->
+						<h2>Managers List</h2>
+						
+						<!-- Managers Table -->
+						<div id="managers-list">
+							<table id="managers-table" class="popup-table">
+								<thead>
+									<tr>
+										<th class="table-heading">Name</th>
+										<th class="table-heading">Email</th>
+										<th class="table-heading">Telephone</th>
+										<th class="table-heading">Post</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- Dynamic content will be added here -->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				
+				<script>
+	// Show the popup
+// Open the managers popup// Show the popup
+// Open the managers popup
+// Open the managers popup
+// Open the managers popup
+// Function to update the manager's post (category) when the dropdown value changes
+// Get CSRF Token from cookie
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function updateManagerPost(managerId, newPost) {
+    fetch(`/update-manager-post/${managerId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken') // Include CSRF token for security
+        },
+        body: JSON.stringify({ post: newPost })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Manager post updated successfully');
+        } else {
+            console.error('Failed to update manager post:', data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error updating manager post:', error);
+    });
+}
+
+function openManagersPopup() {
+    document.getElementById("managers-popup").classList.add("active");
+}
+
+// Close the managers popup
+function closeManagersPopup() {
+    document.getElementById("managers-popup").classList.remove("active");
+}
+
+// Show the managers popup and fetch data
+function showManagersPopup() {
+    document.getElementById('managers-popup').style.display = 'block';
+    fetchManagers(); // Fetch the managers from the database when the popup opens
+}
+
+// Close the popup
+function closeManagersPopup() {
+    document.getElementById('managers-popup').style.display = 'none';
+}
+
+// Fetch managers from the database
+function fetchManagers() {
+    fetch('/get-managers/')  // URL for fetching the managers (we'll define this in the view)
+        .then(response => response.json())
+        .then(data => {
+            const managersTableBody = document.getElementById('managers-list').getElementsByTagName('tbody')[0];
+            managersTableBody.innerHTML = ''; // Clear the current table body
+
+            data.managers.forEach(manager => {
+                const row = document.createElement('tr');
+                
+                // Create a table row for each manager
+                const nameCell = document.createElement('td');
+                nameCell.textContent = manager.name;
+                
+                const emailCell = document.createElement('td');
+                emailCell.textContent = manager.email;
+                
+                const telephoneCell = document.createElement('td');
+                telephoneCell.textContent = manager.telephone;
+                
+                const postCell = document.createElement('td'); // New cell for "Post"
+                const selectPost = document.createElement('select'); // Create a select element
+                
+                // Create options for the dropdown
+                const postOptions = ['unassigned', 'hotel', 'transport', 'park'];
+                postOptions.forEach(option => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option;
+                    optionElement.textContent = option.charAt(0).toUpperCase() + option.slice(1); // Capitalize first letter
+                    if (option === manager.category) {
+                        optionElement.selected = true; // Select the current category
+                    }
+                    selectPost.appendChild(optionElement);
+                });
+
+                // When a new value is selected, update the manager's post
+                selectPost.addEventListener('change', function() {
+                    updateManagerPost(manager.id, selectPost.value);
+                });
+
+                postCell.appendChild(selectPost); // Append the dropdown to the post cell
+
+                // Append the cells to the row
+                row.appendChild(nameCell);
+                row.appendChild(emailCell);
+                row.appendChild(telephoneCell);
+                row.appendChild(postCell); // Append the "Post" dropdown cell
+
+                // Append the row to the table body
+                managersTableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching managers:", error);
+        });
+}
+
+// Function to update the manager's post (category) when the dropdown value changes
+function updateManagerPost(managerId, newPost) {
+    fetch(`/update-manager-post/${managerId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken') // Include CSRF token for security
+        },
+        body: JSON.stringify({ post: newPost })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Manager post updated successfully');
+        } else {
+            console.error('Failed to update manager post');
+        }
+    })
+    .catch(error => {
+        console.error('Error updating manager post:', error);
+    });
+}
+// Get CSRF Token from cookie
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+</script>
+<script>
+    function toggleProfileDropdown() {
+        const dropdown = document.getElementById('profile-dropdown');
+        dropdown.style.display = (dropdown.style.display === 'none' || dropdown.style.display === '') ? 'block' : 'none';
+    }
+
+    // Close the dropdown if the user clicks outside
+    window.onclick = function(event) {
+        const dropdown = document.getElementById('profile-dropdown');
+        const profile = document.querySelector('.profile');
+        if (!profile.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    };
+</script>
+
+
+				
+			</ul>
+			<script src="{% static 'assets/js/script.js' %}"></script>
+			<!-- Dashboard -->
+
+</body>
+</html>
