@@ -1,7 +1,7 @@
 # Tourism Project
 
 ## Overview
-This project is designed to showcase tourism-related information, including popular destinations, travel tips, and resources for travelers. It serves as a guide for individuals looking to explore various locations and enhance their travel experiences.
+This project is designed by [Eduard GASASIRA,Elyse NIYONZIMA and Kevin NIYONSENGA] to showcase tourism-related information, including popular destinations, travel tips, and resources for travelers. It serves as a guide for individuals looking to explore various locations and enhance their travel experiences.
 
 ## Features
 - **Destination Guides:** Detailed information about various travel destinations.
